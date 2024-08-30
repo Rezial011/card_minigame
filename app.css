@@ -32,5 +32,19 @@ section > div {
 img {
     width: 12rem;
     height: auto;
-    cursor: pointer;
+    /* cursor: pointer; */
+}
+
+button {
+    all: unset;
+}
+
+#draw {
+    border-color: rgb(133, 64, 245);
+    color: rgb(133, 64, 245);
+}
+
+#draw:hover {
+    background-color: rgb(133, 64, 245);
+    color: white;
 }

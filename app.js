@@ -17,10 +17,13 @@ draw.addEventListener('click', (e) => {
     console.log(card2)
 
     hide()
+
+    cardbutton1.removeAttribute('disabled')
+    cardbutton2.removeAttribute('disabled')
 })
 
-const cardbutton1 = document.querySelector('#card1')
-const cardbutton2 = document.querySelector('#card2')
+const cardbutton1 = document.querySelector('#kartu1')
+const cardbutton2 = document.querySelector('#kartu2')
 let pilih = null
 
 cardbutton1.addEventListener('click', (e) => {
@@ -30,6 +33,7 @@ cardbutton1.addEventListener('click', (e) => {
     guess()
     drawing()
     reset()
+    disable()
 })
 
 cardbutton2.addEventListener('click', (e) => {
@@ -39,13 +43,19 @@ cardbutton2.addEventListener('click', (e) => {
     guess()
     drawing()
     reset()
+    disable()
 })
+
+function disable() {
+    cardbutton1.setAttribute('disabled', 'true')
+    cardbutton2.setAttribute('disabled', 'true')
+}
 
 const komentar = document.querySelector('p')
 
 function guess() {
     const lose = ['you lose!', 'so close!', 'not that', 'try again', 'nooooooo']
-    const win = ['you win!', 'great!', "that's cool!", 'correct!', "let's goooo"]
+    const win = ['you win!', 'great!', "excellent!", 'correct!', "let's goooo"]
 
     switch (pilih) {
         case 'a':
@@ -54,7 +64,7 @@ function guess() {
             } else if (card1 === 0) {
                 komentar.innerText = `${lose[Math.floor(Math.random() * 5)]}`
             } else {
-                console.log('draw first')
+                komentar.innerText = 'draw first'
             }
         break;
             
@@ -64,7 +74,7 @@ function guess() {
             } else if (card2 === 0) {
                 komentar.innerText = `${lose[Math.floor(Math.random() * 5)]}`
             } else {
-                console.log('draw first')
+                komentar.innerText = 'draw first'
             }
         break;
     }
@@ -78,8 +88,8 @@ function hide() {
     }
 }
 
-const kartu1 = document.querySelector('#kartu1')
-const kartu2 = document.querySelector('#kartu2')
+const kartu1 = document.querySelector('#kartu1img')
+const kartu2 = document.querySelector('#kartu2img')
 
 function drawing() {
     if (card1 === 1) {
@@ -92,7 +102,5 @@ function drawing() {
 }
 
 function reset() {
-    // card1 = null
-    // card2 = null
     pilih = null
 }
