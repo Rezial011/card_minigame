@@ -32,7 +32,17 @@ section > div {
 img {
     width: 12rem;
     height: auto;
-    /* cursor: pointer; */
+}
+
+@media (max-width : 708px) {
+    img {
+        width: 9rem;
+        height: auto;
+    }
+
+    section > div {
+        width: 77%;
+    }
 }
 
 button {
@@ -47,4 +57,11 @@ button {
 #draw:hover {
     background-color: rgb(133, 64, 245);
     color: white;
+}
+
+#lifebadge {
+    background-color: #00000027;
+    font-size: medium;
+    font-weight: lighter;
+    border: 1px solid #ffffff23;
 }

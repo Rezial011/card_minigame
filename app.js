@@ -3,6 +3,9 @@ let card2 = null
 
 const draw = document.querySelector('#draw')
 
+let a = 0
+let b = 0
+
 draw.addEventListener('click', (e) => {
     e.preventDefault()
 
@@ -20,6 +23,12 @@ draw.addEventListener('click', (e) => {
 
     cardbutton1.removeAttribute('disabled')
     cardbutton2.removeAttribute('disabled')
+
+    if (a === 0 && b === 0) {
+        draw.textContent = 'Draw'
+        komentar.innerText = 'Guess it!'
+        lifepoin.textContent = '5'
+    }
 })
 
 const cardbutton1 = document.querySelector('#kartu1')
@@ -30,20 +39,30 @@ cardbutton1.addEventListener('click', (e) => {
     e.preventDefault()
     pilih = 'a'
 
+    if (card1 !== null && card2 !== null) {
+        b += 1
+    }
+
     guess()
     drawing()
     reset()
     disable()
+    nyawa()
 })
 
 cardbutton2.addEventListener('click', (e) => {
     e.preventDefault()
     pilih = 'b'
 
+    if (card1 !== null && card2 !== null) {
+        b += 1
+    }
+
     guess()
     drawing()
     reset()
     disable()
+    nyawa()
 })
 
 function disable() {
@@ -61,8 +80,11 @@ function guess() {
         case 'a':
             if (card1 === 1) {
                 komentar.innerText = `${win[Math.floor(Math.random() * 5)]}`
+                winpoin = true
+                a += 1
             } else if (card1 === 0) {
                 komentar.innerText = `${lose[Math.floor(Math.random() * 5)]}`
+                winpoin = false
             } else {
                 komentar.innerText = 'draw first'
             }
@@ -71,8 +93,11 @@ function guess() {
         case 'b':
             if (card2 === 1) {
                 komentar.innerText = `${win[Math.floor(Math.random() * 5)]}`
+                winpoin = true
+                a += 1
             } else if (card2 === 0) {
                 komentar.innerText = `${lose[Math.floor(Math.random() * 5)]}`
+                winpoin = false
             } else {
                 komentar.innerText = 'draw first'
             }
@@ -103,4 +128,29 @@ function drawing() {
 
 function reset() {
     pilih = null
+}
+
+//===============================
+
+const lifepoin = document.querySelector('#lifepoin')
+let winpoin = null
+let life = 5
+
+function nyawa() {
+    if (winpoin == false && life > 0) {
+        life -= 1
+    }
+
+    lifepoin.textContent = life
+
+    if (life === 0) {
+        komentar.innerHTML = `You win <b>${a}/ ${b}</b> - Wanna play again?`
+        draw.textContent = 'Play again'
+        
+        life = 5
+        winpoin = null
+
+        a = 0
+        b = 0
+    }
 }
